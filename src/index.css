@@ -1,0 +1,498 @@
+@import 'tailwindcss';
+
+@theme {
+  --breakpoint-desktop: 1440px;
+}
+
+@font-face {
+  font-family: "Inter:Semi Bold";
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://static.figma.com/font/Inter_1") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist:Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://static.figma.com/font/Geist_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist:SemiBold";
+  font-style: normal;
+  font-weight: 600;
+  src: url("https://static.figma.com/font/Geist_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist:Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://static.figma.com/font/Geist_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist:Light";
+  font-style: normal;
+  font-weight: 300;
+  src: url("https://static.figma.com/font/Geist_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Geist:Regular";
+  font-style: normal;
+  font-weight: 400;
+  src: url("https://static.figma.com/font/Geist_wght__1") format("woff2");
+}
+
+@font-face {
+  font-family: "Cormorant SC:Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://static.figma.com/font/CormorantSC-Bold_2") format("woff2");
+}
+
+@font-face {
+  font-family: "Cormorant:Bold";
+  font-style: normal;
+  font-weight: 700;
+  src: url("https://static.figma.com/font/Cormorant_wght__1") format("woff2");
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  font-family: "Geist:Regular", sans-serif;
+}
+
+.mobile-shell {
+  overflow-x: clip;
+}
+
+/* ── Shell visibility ── */
+.shell-desktop { display: none; overflow-x: hidden; }
+.shell-tablet  { display: none; }
+.shell-mobile  { display: block; }
+
+@media (min-width: 640px) {
+  .shell-tablet  { display: block; }
+  .shell-mobile  { display: none; }
+}
+
+@media (min-width: 1440px) {
+  .shell-desktop { display: block; }
+  .shell-tablet  { display: none; }
+}
+
+/* Case page */
+.case-shell-desktop { display: none; }
+.case-shell-mobile  { display: block; }
+
+@media (min-width: 1440px) {
+  .case-shell-desktop { display: block; }
+  .case-shell-mobile  { display: none; }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 400ms ease-out, transform 400ms ease-out;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+
+/* Line draw animation */
+@keyframes line-draw {
+  from { transform: scaleX(0); transform-origin: left; }
+  to { transform: scaleX(1); transform-origin: left; }
+}
+.section-line {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.section-line.is-visible {
+  animation: line-draw 200ms ease-out forwards;
+}
+
+/* Hide built-in header inside desktop homepage import */
+[data-name="portfolio-homepage-dektop"] [data-name="Header Navigation"] {
+  display: none !important;
+}
+
+/* Make tablet homepage header sticky */
+.home-tablet-shell [data-name="Header Navigation"] {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
+}
+
+/* Make mobile homepage header sticky + consistent height */
+.home-mobile-shell [data-name="Header Navigation"] {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
+  height: 76px !important;
+  box-sizing: border-box !important;
+  padding-left: 20px !important;
+  padding-right: 12px !important;
+}
+
+/* Case study mobile nav — consistent height */
+.mobile-shell .mobile-nav-bar [data-name="Frame"] {
+  height: 76px !important;
+  box-sizing: border-box !important;
+}
+
+/* Desktop header height — scoped to the fixed header overlay only */
+.header-sticky [data-name="Header Navigation"] {
+  height: 90px;
+  padding-left: 120px !important;
+  padding-right: 120px !important;
+}
+/* Desktop header brand logo — SemiBold 17px */
+[data-name="Header Navigation"] [data-name="Brand Logo"] p {
+  font-family: "Geist:SemiBold", sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 17px !important;
+}
+/* Tablet header title — SemiBold 17px */
+.mobile-shell .mobile-nav-bar [data-name="Brand Logo"] p::before {
+  font-family: "Geist:SemiBold", sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 17px !important;
+}
+
+/* Header sticky transition */
+.header-sticky {
+  transition: background-color 200ms ease, backdrop-filter 200ms ease, border-color 200ms ease;
+}
+
+/* Button hover */
+.cta-btn {
+  transition: opacity 150ms ease;
+}
+.cta-btn:hover {
+  opacity: 0.7;
+}
+
+/* Image pair hover */
+.img-hover {
+  transition: transform 300ms ease;
+}
+.img-hover:hover {
+  transform: scale(1.02);
+}
+
+/* Content (Frame15 / section 02) → px-[20px] */
+.mobile-shell [data-name="Content"]:not(:has([data-name="AI Workspace Visual (full-bleed)"])) {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+/* Frame15 inner wrapper → remove px-[20px] (padding moved to Content) */
+.mobile-shell div:has(> [data-name="Content"]:not(:has([data-name="AI Workspace Visual (full-bleed)"]))) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* === Section 04: text constrained 600px, images full width === */
+
+/* Content1 outer → full width */
+.mobile-shell [data-name="Content"]:has([data-name="AI Workspace Visual (full-bleed)"]) {
+  max-width: 100% !important;
+}
+/* Frame29 (parent) → remove overflow-clip */
+.mobile-shell div:has(> [data-name="Content"]:has([data-name="AI Workspace Visual (full-bleed)"])) {
+  overflow: visible !important;
+}
+/* Content1 inner → remove horizontal padding */
+.mobile-shell [data-name="Content"]:has([data-name="AI Workspace Visual (full-bleed)"]) > div {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* Frame30 (text) → restore px-[20px], max-w-600, center */
+.mobile-shell [data-name="Content"]:has([data-name="AI Workspace Visual (full-bleed)"]) > div > div:first-child {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/* Before/after image strip — horizontal scroll, same padding as Screens1 */
+.mobile-shell [data-name="AI Workspace Visual (full-bleed)"] {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  width: 100% !important;
+  justify-content: center !important;
+}
+.mobile-shell [data-name="AI Workspace Visual (full-bleed)"]::-webkit-scrollbar {
+  display: none;
+}
+/* Remove overflow clip from ancestors */
+.mobile-shell div:has(> [data-name="AI Workspace Visual (full-bleed)"]),
+.mobile-shell div:has(> * > [data-name="AI Workspace Visual (full-bleed)"]) {
+  overflow: visible !important;
+}
+
+/* Tablet overrides */
+/* Hide Nav col in all footers */
+[data-name="nav-col"],
+[data-name="links-col"] {
+  display: none !important;
+}
+
+/* Mobile footer — override 40px default to 20px, add top border */
+.mobile-shell [data-name="contact-footer-bar"] {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  border-top: 1px solid #ebebeb !important;
+}
+
+@media (min-width: 640px) {
+  .mobile-shell [data-name="contact-footer-bar"] {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+  .mobile-shell [data-name="Tool Tabs (horizontal scroll on mobile)"] {
+    max-width: 600px !important;
+  }
+  /* Approach content container — left-align */
+  .mobile-shell div:has(> div > [data-name="Tool Tabs (horizontal scroll on mobile)"]) {
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+  /* Frame23 (tabs + screens container) — center content on tablet */
+  .mobile-shell div:has(> [data-name="Tool Tabs (horizontal scroll on mobile)"]) {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  /* Frame20 (approach text block) — constrain and left-align */
+  .mobile-shell div:has(> div > [data-name="Tool Tabs (horizontal scroll on mobile)"]) > div:first-child {
+    width: 600px !important;
+    align-items: flex-start !important;
+  }
+  /* Tool tabs — no scroll, left-aligned chips */
+  .mobile-shell [data-name="Tool Tabs (horizontal scroll on mobile)"] {
+    overflow-x: visible !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 20px !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
+  .mobile-shell [data-name="Tool Tabs (horizontal scroll on mobile)"]::after {
+    display: none !important;
+  }
+  /* Screens1 inner strip — center cards on tablet */
+  .mobile-shell [data-name="Screens"] > div {
+    padding-top: 24px !important;
+    padding-right: 40px !important;
+    padding-bottom: 24px !important;
+    justify-content: center !important;
+  }
+  /* AiWorkspaceVisualFullBleed — center on tablet */
+  .mobile-shell [data-name="AI Workspace Visual (full-bleed)"] {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .mobile-shell [data-name="AI Workspace Visual (full-bleed)"] > div {
+    padding-top: 12px !important;
+    padding-right: 20px !important;
+    padding-bottom: 12px !important;
+  }
+  /* Content1 (section 04) — remove vertical padding */
+  .mobile-shell [data-name="Content"]:has([data-name="AI Workspace Visual (full-bleed)"]) {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Caption labels under before/after screens */
+.mobile-shell [data-name="AI Workspace Visual (full-bleed)"] [data-name="Text"] p {
+  font-family: "Geist:SemiBold", sans-serif !important;
+  font-size: 11px !important;
+}
+
+/* Frame8 (ROLE/STATUS row) — uniquely identified by having two consecutive overflow-clip Frame children (Frame9+Frame10) */
+.mobile-shell [data-name="Frame"].overflow-clip.w-full:has(> [data-name="Frame"].overflow-clip + [data-name="Frame"].overflow-clip) {
+  column-gap: 40px !important;
+}
+/* Frame9, Frame10 (ROLE/STATUS columns) — fit-content width */
+.mobile-shell [data-name="Frame"].overflow-clip.w-full:has(> [data-name="Frame"].overflow-clip + [data-name="Frame"].overflow-clip) > [data-name="Frame"].overflow-clip {
+  width: fit-content !important;
+}
+/* Paragraphs in Frame9/Frame10 — fit-content width */
+.mobile-shell [data-name="Frame"].overflow-clip.w-full:has(> [data-name="Frame"].overflow-clip + [data-name="Frame"].overflow-clip) > [data-name="Frame"].overflow-clip > p {
+  width: fit-content !important;
+}
+
+/* Hide original mobile header — replaced by MobileNav sticky bar */
+.mobile-shell [data-name="home-planner-mobile"] > [data-name="Frame"]:first-child {
+  display: none !important;
+}
+
+/* Hide original mobile footer — replaced by MobileFooter */
+.mobile-shell [data-name="home-planner-mobile"] > [data-name="Frame"]:last-child {
+  display: none !important;
+}
+
+/* Header: replace text, font, size */
+.mobile-shell .mobile-nav-bar [data-name="Brand Logo"] p {
+  font-family: "Geist:Bold", sans-serif !important;
+  font-size: 22px !important;
+}
+.mobile-shell .mobile-nav-bar [data-name="Brand Logo"] p::before {
+  content: "More than AI Redesign";
+}
+.mobile-shell .mobile-nav-bar [data-name="Brand Logo"] p {
+  font-size: 0 !important;
+}
+.mobile-shell .mobile-nav-bar [data-name="Brand Logo"] p::before {
+  font-size: 22px;
+  font-family: "Geist:Bold", sans-serif;
+  color: #1a1a1a;
+  white-space: normal;
+  text-align: center;
+}
+.mobile-shell .mobile-nav-bar [data-name="Brand Logo"] p {
+  white-space: normal !important;
+}
+.mobile-shell [class*="Cormorant"] {
+  font-family: "Geist:Bold", sans-serif !important;
+}
+
+/* Decorative dot pattern on mobile hero background */
+.mobile-shell [data-name="Hero Image (mobile)"] {
+  background-image: radial-gradient(circle, rgba(90, 90, 120, 0.15) 2px, transparent 2px);
+  background-size: 50px 50px;
+}
+
+/* Fix hero heading overflow on mobile */
+.mobile-shell p.whitespace-nowrap.text-\[30px\] {
+  white-space: normal !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Remove overflow clip from ancestors that contain the scrollable strips */
+.mobile-shell div:has(> [data-name="Tool Tabs (horizontal scroll on mobile)"]),
+.mobile-shell div:has(> * > [data-name="Tool Tabs (horizontal scroll on mobile)"]),
+.mobile-shell div:has(> [data-name="Screens"]),
+.mobile-shell div:has(> * > [data-name="Screens"]) {
+  overflow: visible !important;
+}
+
+/* === Approach section (Frame19): text+chips constrained, images full-width === */
+
+/* Frame19 outer (max-w-[600px]) → full width */
+.mobile-shell div:has(> div > div > div > [data-name="Tool Tabs (horizontal scroll on mobile)"]) {
+  max-width: 100% !important;
+}
+/* Frame19 overflow-clip inner → remove clip */
+.mobile-shell div:has(> div > div > [data-name="Tool Tabs (horizontal scroll on mobile)"]) {
+  overflow: visible !important;
+}
+/* Frame19 content (px-[20px]) → remove horizontal padding, center children */
+.mobile-shell div:has(> div > [data-name="Tool Tabs (horizontal scroll on mobile)"]) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100% !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+/* Frame20 (title + description) → restore px-[20px], left-align */
+.mobile-shell div:has(> div > [data-name="Tool Tabs (horizontal scroll on mobile)"]) > div:first-child {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  justify-content: flex-start !important;
+}
+/* ToolTabs → align items center, start from left */
+.mobile-shell [data-name="Tool Tabs (horizontal scroll on mobile)"] {
+  align-items: center !important;
+  justify-content: flex-start !important;
+}
+
+/* Mobile horizontal scroll — Screens1 inner flex row */
+.mobile-shell [data-name="Screens"] {
+  width: 100% !important;
+  position: static;
+  left: auto;
+  transform: none;
+}
+.mobile-shell [data-name="Screens"] > div {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  align-items: center !important;
+}
+.mobile-shell [data-name="Screens"] > div::-webkit-scrollbar {
+  display: none;
+}
+.mobile-shell [data-name="Screens"] > div::after {
+  content: "";
+  display: block;
+  min-width: 20px;
+  flex-shrink: 0;
+}
+
+/* Mobile horizontal scroll — tool chips */
+.mobile-shell [data-name="Tool Tabs (horizontal scroll on mobile)"] {
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  width: 100% !important;
+  align-items: center !important;
+}
+.mobile-shell [data-name="Tool Tabs (horizontal scroll on mobile)"]::-webkit-scrollbar {
+  display: none;
+}
+.mobile-shell [data-name="Tool Tabs (horizontal scroll on mobile)"]::after {
+  content: "";
+  display: block;
+  min-width: 20px;
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .section-line {
+    transform: scaleX(1);
+    animation: none;
+  }
+  .img-hover {
+    transition: none;
+  }
+  .img-hover:hover {
+    transform: none;
+  }
+  .cta-btn {
+    transition: none;
+  }
+}

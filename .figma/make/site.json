@@ -1,0 +1,11 @@
+{
+  "title": "Maryna Ivanova | Cases",
+  "description": "Showcase your work with a pixel-perfect portfolio site that features smooth animations and a clean design, enhancing user engagement without distractions.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
