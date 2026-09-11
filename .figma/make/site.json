@@ -2,7 +2,7 @@
   "title": "Mi — Product Designer",
   "description": "Product Designer focused on mobile and desktop apps, creating intuitive experiences for complex products.",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,
